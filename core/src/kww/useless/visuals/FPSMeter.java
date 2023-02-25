@@ -6,7 +6,6 @@ import fluddokt.opsu.fake.Font;
 import fluddokt.opsu.fake.Graphics;
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.Fonts;
-import kww.useless.Instances;
 import kww.useless.interfaces.IResizable;
 
 import static kww.useless.Instances.container;
@@ -58,7 +57,6 @@ public class FPSMeter implements IResizable {
 
         int xo;
         xo = drawText(g, getColor(targetFps, currentFps), currentFps + " fps", this.x, this.y);
-        drawText(g, ORANGE, Instances.visualizer.rendered_rectangles + "", xo, this.y);
     }
 
     private Color255 getColor(int targetValue, int realValue)

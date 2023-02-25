@@ -7,6 +7,8 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import itdelatrisu.opsu.ErrorHandler;
 import itdelatrisu.opsu.GameImage;
@@ -19,24 +21,32 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 public class GameOpsu extends ApplicationAdapter {
-
     public final static String VERSION = "0.16.1a";
     public StateBasedGame game;
 
-    Stage stage;
-    Table table;
-    Skin skin;
-    static GameOpsu gameOpsu;
+    private Stage stage;
+    private Table table;
+    private Skin skin;
+    private static GameOpsu gameOpsu;
 
-    boolean inited = false;
+    private boolean inited = false;
 
     private int dialogCnt;
 
-    Label loadingLabel;
+    private Label loadingLabel;
+
+    //kww
+    /** {@link Disposable}s those have to be disposed */
+    private final Array<Disposable> disposables = new Array<>();
 
     public GameOpsu()
     {
         gameOpsu = this;
+    }
+
+    public static GameOpsu getInstance()
+    {
+        return gameOpsu;
     }
 
     @Override
@@ -242,9 +252,20 @@ public class GameOpsu extends ApplicationAdapter {
             }
         }
 
+        for (Disposable disposable : disposables)
+        {
+            disposable.dispose();
+        }
+
         game.container.closing();
 
         System.out.println("We are closing game.\nSee you later!");
+    }
+
+    /** Automatically (???) dispose objects */
+    public void registerDisposable(Disposable disposable)
+    {
+        disposables.add(disposable);
     }
 
     public static void error(String string, Throwable e)

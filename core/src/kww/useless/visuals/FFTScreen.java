@@ -2,12 +2,13 @@ package kww.useless.visuals;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Timer;
 import com.deo.mvis.jtransforms.fft.FloatFFT_1D;
+import fluddokt.opsu.fake.GameOpsu;
 import fluddokt.opsu.fake.Graphics;
 import itdelatrisu.opsu.audio.MusicController;
+import itdelatrisu.opsu.beatmap.TimingPoint;
 import itdelatrisu.opsu.ui.MenuButton;
 import itdelatrisu.opsu.ui.UI;
 import kww.useless.Instances;
@@ -15,7 +16,6 @@ import kww.useless.UselessUtils;
 import kww.useless.UselessUtils.Samples;
 import kww.useless.interfaces.IInitable;
 import lombok.Getter;
-import lombok.var;
 
 import java.util.Arrays;
 
@@ -84,9 +84,12 @@ public class FFTScreen implements IInitable, Disposable {
     // private jojo reference
     private MenuButton logo;
 
-    private final int amplitudeModifier = 4194304; // note this is NOT a random numba
+    private final int amplitudeModifier = 4194304; // note this is definitely NOT a random numba
 
-    public FFTScreen() {}
+    public FFTScreen()
+    {
+        GameOpsu.getInstance().registerDisposable(this);
+    }
 
     @Override
     public void init()
@@ -94,6 +97,7 @@ public class FFTScreen implements IInitable, Disposable {
         if (Instances.mainMenu.getLogo() == null)
             throw new Error("init visualizer ONLY AFTER the logo button was created");
 
+        //todo: change ShapeRenderer -> ShapeDrawer
         renderer = Graphics.getShapeRender();
         fft = new FloatFFT_1D(fftSize);
         audioData = new float[fftSize];
@@ -114,8 +118,7 @@ public class FFTScreen implements IInitable, Disposable {
                                        2, fft), 0, temporalAmplitudes, 0, temporalAmplitudes.length
         );
 
-        //todo remove this "var"...
-        var lastTimingPoint = MusicController.getLastTimingPoint();
+        TimingPoint lastTimingPoint = MusicController.getLastTimingPoint();
 
         if (lastTimingPoint != null)
         {
@@ -158,15 +161,11 @@ public class FFTScreen implements IInitable, Disposable {
     private final float colorShift = 14.21f;
     private final float colorShift2 = 18.947f;
     private final float colorAmplitude = 3f;
-    public int rendered_rectangles = 0;
-
 
     private void render(float delta)
     {
         Graphics.checkMode(Graphics.DrawMode.SHAPEFILLED); // workaround for this "shitty" graphics handling
         //renderer.begin(ShapeRenderer.ShapeType.Filled);
-
-        rendered_rectangles = 0;
 
         float decayFactor = delta * decay * (isKiaiTime ? 1.25f : 1f);
 
@@ -197,10 +196,10 @@ public class FFTScreen implements IInitable, Disposable {
                     //float barW = (float) (spriteRadius * Math.sqrt(2 * (1 - Math.cos(Math.toRadians(360f / bars_per_visualiser)))) / 2f) + 0.12f;
                     //float barW = (float) (spriteRadius * (Math.sqrt(2 * (1 - Math.cos(Math.toRadians(360f / bars_per_visualiser)))) / 2f + 0.01f));
 
-                    float barW = spriteRadius * /*UselessUtils.Maths.round*/((float) (Math.sqrt(2 * (1 - Math.cos(Math.toRadians(360f / bars_per_visualiser)))) / 2f) + 0.01f);
+                    float barW = spriteRadius * ((float) (Math.sqrt(2 * (1 - Math.cos(Math.toRadians(360f / bars_per_visualiser)))) / 2f) + 0.01f);
                     float barH = audioData[i] * bar_length * Instances.mainMenu.logoSizeMultiplier;
 
-                    for (int j = 0; j < visualiser_rounds; j++) // reduce scope of nested loop
+                    for (int j = 0; j < visualiser_rounds; j++)
                     {
                         float rotation_deg = i / (float) bars_per_visualiser * 360 + j * 360 / (float) visualiser_rounds;
 
@@ -209,7 +208,6 @@ public class FFTScreen implements IInitable, Disposable {
                         renderer.setColor(theColorYouHaveToPayFor);
 
                         renderer.rect(x, y + spriteRadius, 0f, -spriteRadius, barW, barH, 1f, 1f, rotation_deg); //negated rotation_deg
-                        rendered_rectangles++;
                     }
                 }
                 break;
@@ -232,99 +230,10 @@ public class FFTScreen implements IInitable, Disposable {
 
                     renderer.setColor(theColorYouHaveToPayFor);
                     renderer.rect(barW * i, UselessUtils.container.height, barW, -barH);
-                    rendered_rectangles++;
                 }
                 break;
             }
         }
-
-        //renderer.end();
-    }
-
-    private void render000(float delta)
-    {
-        Graphics.checkMode(Graphics.DrawMode.SHAPEFILLED); // workaround for this "shitty" graphics handling
-        renderer.begin(ShapeRenderer.ShapeType.Filled);
-
-        rendered_rectangles = 0;
-
-        float decayFactor = delta * decay * (isKiaiTime ? 1.25f : 1f);
-
-        switch (currentSpectrumStyle)
-        {
-            case CIRCULAR:
-            {
-                final float x = logo.getX();
-                //final float y = MainMenu.getLogo().getY();
-                final float y = logo.getY() - (logo.getY() - Instances.mainMenu.heightCenter) * 2;
-
-//                float decayFactor = delta * decay * (isKiaiTime ? 1.25f : 1f);
-
-                // assuming logo is a circle
-                final float spriteRadius = (logo.getYRadius() - logoPadding) * Instances.mainMenu.getLogoScale();
-
-                for (int i = 0; i < bars_per_visualiser; i++)
-                {
-                    float tmpAD = audioData[i];
-
-                    // decay
-                    audioData[i] -= (audioData[i] + 0.03) * decayFactor;
-                    if (audioData[i] < 0)
-                        audioData[i] = 0;
-
-                    // don't draw if lower than dead zone
-                    if (audioData[i] < amplitude_dead_zone)
-                        continue;
-
-                    float barW = (float) (spriteRadius * Math.sqrt(2 * (1 - Math.cos(Math.toRadians(360f / bars_per_visualiser)))) / 2f);
-                    float barH = audioData[i] * bar_length;
-
-                    for (int j = 0; j < visualiser_rounds; j++) // reduce scope of nested loop
-                    {
-                        float rotation_deg = i / (float) bars_per_visualiser * 360 + j * 360 / (float) visualiser_rounds;
-
-                        //renderer.setColor(alpha.fromHsv(tmpAD * 256 * colorAmplitude + colorShift - colorShift2, 0.75f, 0.9f));
-                        renderer.setColor(theColorYouHaveToPayFor);
-
-                        renderer.setTransformMatrix(new Matrix4().translate(x, y, 0f).rotate(0, 0, 1, -rotation_deg));
-                        renderer.rect(0, spriteRadius, barW, barH);
-                        rendered_rectangles++;
-                    }
-                }
-                break;
-            }
-            case PLAIN:
-            {
-                if (visualizerHasBeenChanged)
-                {
-                    renderer.setTransformMatrix(new Matrix4());
-                    visualizerHasBeenChanged = false;
-                }
-
-                for (int i = 0; i < bars_per_visualiser; i++)
-                {
-                    float tmpAD = audioData[i];
-
-                    // decay
-                    audioData[i] -= (audioData[i] + 0.03) * decayFactor;
-                    if (audioData[i] < 0)
-                        audioData[i] = 0;
-
-                    // don't draw if lower than dead zone
-                    if (audioData[i] < amplitude_dead_zone)
-                        continue;
-
-                    float barW = (float) (Instances.container.width / bars_per_visualiser);
-                    float barH = audioData[i] * bar_length * 2;
-
-                    renderer.setColor(alpha.fromHsv(tmpAD * 256 * colorAmplitude + colorShift - colorShift2, 0.75f, 0.9f));
-                    renderer.rect(barW * i, 0, barW, barH);
-                    rendered_rectangles++;
-                }
-            }
-        }
-
-        renderer.end();
     }
 
     private boolean fakeRotation = true;
