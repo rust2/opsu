@@ -1,4 +1,4 @@
-name: Build_artifacts
+name: Build artifacts
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
         java-version: 11
     - name: Set execution permission for gradlew
       run: chmod +x gradlew
-    - name: Build debug APK, desktop lwjgl2 dist and desktop lwjgl3 dist
+    - name: Build debug APK, desktop lwjgl2 and lwjgl3 dist
       run: |
         ./gradlew android:assembleDebug
         ./gradlew desktop:dist
