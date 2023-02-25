@@ -18,7 +18,6 @@
 
 package itdelatrisu.opsu.options;
 
-import com.badlogic.gdx.Gdx;
 import fluddokt.opsu.fake.*;
 import itdelatrisu.opsu.*;
 import itdelatrisu.opsu.audio.MusicController;
@@ -1017,11 +1016,6 @@ public class Options {
 				ErrorHandler.error("Failed to get available display modes.", e, true);
 			}
 			*/
-
-            for (com.badlogic.gdx.Graphics.DisplayMode mode : Gdx.graphics.getDisplayModes()) {
-                if (width == mode.width && height == mode.height)
-                    return true;
-            }
 
 			return false;
 		}

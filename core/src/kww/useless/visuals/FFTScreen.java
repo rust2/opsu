@@ -175,7 +175,6 @@ public class FFTScreen implements IInitable, Disposable {
             case CIRCULAR:
             {
                 final float x = logo.getX();
-                //final float y = MainMenu.getLogo().getY();
                 final float y = logo.getY();
 
                 // assuming logo is a circle
@@ -196,7 +195,7 @@ public class FFTScreen implements IInitable, Disposable {
                         continue;
 
                     //float barW = (float) (spriteRadius * Math.sqrt(2 * (1 - Math.cos(Math.toRadians(360f / bars_per_visualiser)))) / 2f) + 0.12f;
-//                    float barW = (float) (spriteRadius * (Math.sqrt(2 * (1 - Math.cos(Math.toRadians(360f / bars_per_visualiser)))) / 2f + 0.01f));
+                    //float barW = (float) (spriteRadius * (Math.sqrt(2 * (1 - Math.cos(Math.toRadians(360f / bars_per_visualiser)))) / 2f + 0.01f));
 
                     float barW = spriteRadius * /*UselessUtils.Maths.round*/((float) (Math.sqrt(2 * (1 - Math.cos(Math.toRadians(360f / bars_per_visualiser)))) / 2f) + 0.01f);
                     float barH = audioData[i] * bar_length * Instances.mainMenu.logoSizeMultiplier;
@@ -205,6 +204,7 @@ public class FFTScreen implements IInitable, Disposable {
                     {
                         float rotation_deg = i / (float) bars_per_visualiser * 360 + j * 360 / (float) visualiser_rounds;
 
+                        //todo: Setting to choose between your defined color and hsv
                         //renderer.setColor(alpha.fromHsv(tmpAD * 256 * colorAmplitude + colorShift - colorShift2, 0.75f, 0.9f));
                         renderer.setColor(theColorYouHaveToPayFor);
 

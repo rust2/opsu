@@ -95,7 +95,6 @@ public class GameOpsu extends ApplicationAdapter {
                 height < 600 ? height = 600 : height
         );
 
-        //super.resize(width, height);
         //stage.getViewport().setCamera(Graphics.camera);
         stage.getViewport().update(width, height, true);
         table.invalidate();
@@ -114,8 +113,6 @@ public class GameOpsu extends ApplicationAdapter {
     @Override
     public void render()
     {
-        //super.render();
-
         if (delayLoad > 2 && dialogCnt == 0)
         {
             try
@@ -202,8 +199,6 @@ public class GameOpsu extends ApplicationAdapter {
         if (!inited)
             return;
 
-        //super.pause();
-
         game.container.loseFocus();
         try
         {
@@ -224,7 +219,6 @@ public class GameOpsu extends ApplicationAdapter {
         if (!inited)
             return;
 
-        //super.resume();
         game.container.focus();
 
         System.out.println("Focus re-gained");
@@ -249,9 +243,8 @@ public class GameOpsu extends ApplicationAdapter {
         }
 
         game.container.closing();
-        //super.dispose();
 
-        System.out.println("We are closing game. See you later!");
+        System.out.println("We are closing game.\nSee you later!");
     }
 
     public static void error(String string, Throwable e)
