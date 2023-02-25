@@ -24,17 +24,17 @@ jobs:
         ./gradlew desktop:dist
         ./gradlew desktopLwjgl3:dist
     - name: Upload debug APK
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: app-debug.apk
         path: android/build/outputs/apk/debug/android-debug.apk
     - name: Upload desktop lwjgl2 dist
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: app-desktopLwjgl2.jar
         path: desktop/build/libs/desktop-1.0.jar
     - name: Upload desktop lwjgl2 dist
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: app-desktopLwjgl3.jar
         path: desktopLwjgl3/build/libs/desktopLwjgl3-1.0.jar
