@@ -1,0 +1,34 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'application'
+
+group = 'itdelatrisu'
+version = '0.16.1'
+
+mainClassName = 'itdelatrisu.opsu.Opsu'
+buildDir = new File(rootProject.projectDir, "build/")
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+sourceSets.main.java.srcDirs = [ "src/" ]
+sourceSets {
+    main {
+        java {
+            exclude 'org/newdawn/**'
+            exclude 'org/newdawn/slick/GameContainer.java'
+            exclude 'org/newdawn/slick/Image.java'
+            exclude 'org/newdawn/slick/Input.java'
+            exclude 'org/newdawn/slick/Music.java'
+            exclude 'org/newdawn/slick/gui/*'
+            exclude 'org/newdawn/slick/openal/OpenALStreamPlayer.java'
+            exclude 'org/newdawn/slick/openal/SoundStore.java'
+            exclude 'itdelatrisu/opsu/audio/MultiClip.java'
+        }
+    }
+}
+
+eclipse.project.name = appName + "-core"

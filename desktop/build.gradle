@@ -1,0 +1,87 @@
+apply plugin: "java-library"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+sourceSets.main.java.srcDirs = [ "src/" ]
+sourceSets.main.resources.srcDirs = ["../assets"]
+
+project.ext.mainClassName = "com.mygdx.game.DesktopLauncher"
+project.ext.assetsDir = new File("../assets")
+project.ext.wDir = new File("../run")//kww
+
+import org.gradle.internal.os.OperatingSystem
+
+task run(dependsOn: classes, type: JavaExec) {
+    main(project.mainClassName)
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+//    workingDir = project.assetsDir
+    project.wDir.mkdirs() // it gonna crash if the folder does not exist
+    workingDir = project.wDir
+    ignoreExitValue = true
+
+    if (OperatingSystem.current() == OperatingSystem.MAC_OS) {
+        // Required to run on macOS
+        jvmArgs += "-XstartOnFirstThread"
+    }
+}
+
+task debug(dependsOn: classes, type: JavaExec) {
+    main = project.mainClassName
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+    //workingDir = project.assetsDir
+    project.wDir.mkdirs() // it gonna crash if the folder does not exist
+    workingDir = project.wDir
+    ignoreExitValue = true
+    debug = true
+
+    if (OperatingSystem.current() == OperatingSystem.MAC_OS) {
+        // Required to run on macOS
+        jvmArgs += "-XstartOnFirstThread"
+    }
+}
+
+task dist(type: Jar) {
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+    manifest {
+        attributes 'Main-Class': project.mainClassName
+    }
+    from files(sourceSets.main.output.classesDirs)
+    from files(sourceSets.main.output.resourcesDir)
+    dependsOn configurations.runtimeClasspath
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    with jar
+    from files(project.assetsDir);
+}
+
+/* Original LibGdx part */
+/*task dist(type: Jar) {
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+    manifest {
+        attributes 'Main-Class': project.mainClassName
+    }
+    dependsOn configurations.runtimeClasspath
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    with jar
+}*/
+
+//TODO: do something with this shit
+/*task dist(type: Jar) {
+    from files(sourceSets.main.output.classesDirs)
+    from files(sourceSets.main.output.resourcesDir)
+    from {configurations.compile.collect {zipTree(it)}}
+    from files(project.assetsDir);
+
+    manifest {
+        attributes 'Main-Class': project.mainClassName
+    }
+}*/
+
+dist.dependsOn classes
+
+eclipse.project.name = appName + "-desktop"

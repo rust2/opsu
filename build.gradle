@@ -1,0 +1,138 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        gradlePluginPortal()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        google()
+    }
+
+    dependencies {
+        classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
+
+        /**
+         * for some reason, version 7.0.4 is not working for me
+         * 2022.1.4 (Community Edition)
+         * build #IC-221.6008.13
+         */
+        //noinspection AndroidGradlePluginVersion
+        classpath 'com.android.tools.build:gradle:7.0.0'
+    }
+}
+
+allprojects {
+    apply plugin: "eclipse"
+    apply plugin: "idea"
+
+    version = '1.0'
+    ext {
+        appName = "FKGdxOpsu"
+        gdxVersion = '1.11.0'
+        box2DLightsVersion = '1.5'
+        ashleyVersion = '1.7.4'
+        aiVersion = '1.8.2'
+        gdxControllersVersion = '2.2.1'
+        
+        shapedrawerVersion = '2.5.0'
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        google()
+        gradlePluginPortal()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+        maven { url "https://jitpack.io" }
+    }
+
+    eclipse {
+        classpath {
+            downloadJavadoc = true
+        }
+    }
+}
+
+project(":desktop") {
+    apply plugin: "java-library"
+
+    dependencies {
+        implementation project(":core")
+        api "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
+        api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+        api "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
+        implementation fileTree(dir: 'libs', include: '*.jar')
+        implementation 'org.xerial:sqlite-jdbc:3.15.1'
+    }
+}
+
+// Should mirror project(":desktop") but use lwjgl3 instead
+project(":desktopLwjgl3") {
+    apply plugin: "java-library"
+
+    dependencies {
+        implementation project(":core")
+        api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
+        api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+        api "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
+        implementation fileTree(dir: 'libs', include: '*.jar')
+        implementation 'org.xerial:sqlite-jdbc:3.15.1'
+    }
+}
+
+
+project(":android") {
+    apply plugin: "com.android.application"
+
+    configurations { natives }
+
+    dependencies {
+        implementation project(":core")
+        api "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
+        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
+        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-arm64-v8a"
+        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86_64"
+        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"
+        api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi-v7a"
+        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-arm64-v8a"
+        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86_64"
+        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"
+        implementation fileTree(dir: 'libs', include: '*.jar')
+        implementation 'org.sqldroid:sqldroid:1.0.3'
+        //implementation 'org.jcraft:jorbis:0.0.17'
+        //implementation 'org.tukaani:xz:1.6'
+    }
+}
+
+project(":core") {
+    apply plugin: "java-library"
+
+    dependencies {
+        implementation project(":jlayer")
+        api "com.badlogicgames.gdx:gdx:$gdxVersion"
+        api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        implementation fileTree(dir: 'libs', include: '*.jar')
+        implementation 'org.jcraft:jorbis:0.0.17'
+        implementation 'net.lingala.zip4j:zip4j:2.11.2'
+        //  implementation 'org.json:json:20160810'
+        implementation 'org.json:json:20220924'
+        implementation 'org.tukaani:xz:1.6'
+
+        implementation 'org.jetbrains:annotations:23.1.0'
+        compileOnly 'org.projectlombok:lombok:1.18.24'
+        annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+        implementation "pl.edu.icm:JLargeArrays:1.6"
+        
+        implementation "space.earlygrey:shapedrawer:$shapedrawerVersion"
+    }
+}
+
+project(":jlayer") {
+    apply plugin: "java-library"
+}
+
+tasks.eclipse.doLast {
+    delete ".project"
+}

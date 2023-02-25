@@ -1,0 +1,1 @@
+include 'desktop', 'desktopLwjgl3', 'android', 'core', 'jlayer'
