@@ -30,7 +30,6 @@ android {
 
         debug {
             resValue "string", "app_name", "opsu!debug"
-            minifyEnabled true
             applicationIdSuffix ".debug"
             debuggable true
         }
@@ -84,15 +83,17 @@ task run(type: Exec) {
         def sdkDir = properties.getProperty('sdk.dir')
         if (sdkDir) {
             path = sdkDir
-        } else {
-            path = "$System.env.ANDROID_HOME"
         }
-    } else {
-        path = "$System.env.ANDROID_HOME"
     }
+    // Local property is not found
+    if(path == null)
+        path = System.getenv('ANDROID_HOME')
+    // Still null? (fallback)
+    if(path == null)
+        path = System.getenv('ANDROID_SDK_ROOT')
 
     def adb = path + "/platform-tools/adb"
-    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.mygdx.game/com.mygdx.game.AndroidLauncher'
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'fluddokt.opsu.android/fluddokt.opsu.android.AndroidLauncher'
 }
 
 eclipse.project.name = appName + "-android"
