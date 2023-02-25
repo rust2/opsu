@@ -19,6 +19,7 @@ import java.util.Map;
 
 import static kww.useless.visuals.image.TextureAtlas.*;
 
+/** I did some changed here */
 public class Image {
     @Getter TextureRegion textureRegion;
 
@@ -29,9 +30,12 @@ public class Image {
     String filename;
     ReferenceInfo referenceInfo;
     @Getter static LinkedHashMap<String, ReferenceInfo> images = new LinkedHashMap<>();
-    public static void printReferences() {
+
+    public static void printReferences()
+    {
         System.out.println("Trying to print all references...");
-        for(Map.Entry<String, ReferenceInfo> entry : images.entrySet()){
+        for (Map.Entry<String, ReferenceInfo> entry : images.entrySet())
+        {
             String key = entry.getKey();
             ReferenceInfo value = entry.getValue();
 
@@ -46,7 +50,6 @@ public class Image {
 
     Image parentImage;
     FrameBuffer fb;
-    /*FBGraphics fbg;*/
     Pixmap pixmap;
 
     public Image(String filename) throws SlickException
@@ -76,7 +79,7 @@ public class Image {
 
             if (pixmap.getWidth() >= ATLAS_SIZE || pixmap.getHeight() >= ATLAS_SIZE)
             {
-                if(currentAtlas != null)
+                if (currentAtlas != null)
                 {
                     currentAtlas.setFull();
                     currentAtlas = new TextureAtlas();
@@ -184,8 +187,6 @@ public class Image {
         this.width = width;
         this.height = height;
         fb = new FrameBuffer(Pixmap.Format.RGBA8888, width, height, false);
-        /*fbg = new FBGraphics(fb);*/
-//        textureRegion = new TextureRegion(fb.getColorBufferTexture());
         textureRegion = new TextureRegion(new Texture(width, height, Pixmap.Format.RGBA8888));
         //name = "FrameBuffer image";
     }
@@ -306,18 +307,6 @@ public class Image {
             pixmap = new Pixmap(ResourceLoader.getFileHandle(filename));
         return pixmap.getPixel((int) (x * pixmap.getWidth() / width), (int) (y * pixmap.getHeight() / height)) & 0xff;
     }
-
-    /*public Graphics getGraphics()
-    {
-        if (fb != null && fbg != null)
-        {
-            return fbg;
-        }
-        else
-        {
-            throw new Error("Getting graphics for non framebuffer image");
-        }
-    }*/
 
     public Color getColor(int x, int y)
     {

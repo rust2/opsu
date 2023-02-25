@@ -33,6 +33,7 @@ public class Init {
     }
 
     //todo: finish
+    // I'm soooo lazy to finish it, but I will
     private static void constructThemeBeatmaps()
     {
         ThemeSongs.add(new FakeBeatmap("circles", "nekodex - circles! (peppy).osu"));

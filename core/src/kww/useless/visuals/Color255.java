@@ -2,6 +2,11 @@ package kww.useless.visuals;
 
 import com.badlogic.gdx.graphics.Color;
 
+/**
+ * Oh no...
+ *
+ * @author kww
+ */
 public class Color255 extends Color {
     public int ri, gi, bi, ai; // 'i' stands for int
     private fluddokt.opsu.fake.Color fake;
