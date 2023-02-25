@@ -130,7 +130,5 @@ public class Input {
 
 	public void addMouseListener(MouseListener mouseListener) {
 		GameOpsu.getInstance().game.addInputListener(mouseListener);
-		
 	}
-
 }

@@ -616,12 +616,14 @@ public class MainMenu extends BasicGameState {
         // tooltips
         if (Instances.toolbar.toolbarMusicButton.contains(mouseX, mouseY))
             UI.updateTooltip(delta, "now playing\nmanage the currently playing track", true);
-//        else if (Instances.toolbar.toolbarDownloadsButton.contains(mouseX, mouseY))
-//            UI.updateTooltip(delta, "beatmap listing\nbrowse for new beatmaps", true);
-//        else if (Instances.toolbar.toolbarSettingsButton.contains(mouseX, mouseY))
-//            UI.updateTooltip(delta, "settings\nchange the way " + OpsuConstants.PROJECT_NAME + " behaves", true);
-//        else if (Instances.toolbar.toolbarProfileButton.contains(mouseX, mouseY))
-//            UI.updateTooltip(delta, "profile overlay", false);
+        else if (Instances.toolbar.toolbarDownloadsButton.contains(mouseX, mouseY))
+            UI.updateTooltip(delta, "beatmap listing\nbrowse for new beatmaps", true);
+        else if (Instances.toolbar.toolbarSettingsButton.contains(mouseX, mouseY))
+            UI.updateTooltip(delta, "settings\nchange the way " + OpsuConstants.PROJECT_NAME + " behaves", true);
+        else if (Instances.toolbar.toolbarProfileButton.contains(mouseX, mouseY))
+            UI.updateTooltip(delta, "profile overlay", false);
+        else if (Instances.toolbar.toolbarAboutButton.contains(mouseX, mouseY))
+            UI.updateTooltip(delta, "about!", false);
 //        else if (repoButton != null && repoButton.contains(mouseX, mouseY))
 //        {
 //            String version = Updater.getInstance().getCurrentVersion();
