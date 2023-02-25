@@ -2,8 +2,7 @@
 /run/
 /jlayer/build/
 
-!.idea/codeStyles/codeStyleConfig.xml
-!.idea/codeStyles/Project.xml
+!.idea/codeStyles/
 
 ## Java
 *.class
