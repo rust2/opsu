@@ -35,6 +35,7 @@ public class DynamicFreeTypeFont {
         this.fontParam = fontParam;
         Library library = FreeType.initFreeType();
 
+        System.out.println("Trying to load font: " + font.path());
         face = library.newFace(font, 0);
 
         if (face == null)
@@ -57,7 +58,7 @@ public class DynamicFreeTypeFont {
 
     // ArrayList<Texture> pages = new ArrayList<Texture>();
     //HashMap<Character, CharInfo> charmap = new HashMap<Character, CharInfo>();
-    IntMap<CharInfo> charmap = new IntMap<CharInfo>();
+    IntMap<CharInfo> charmap = new IntMap<>();
     IntFloatMap charwidth = new IntFloatMap();
 
     Pixmap curPixmap;
