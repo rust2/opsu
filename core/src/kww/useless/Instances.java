@@ -12,7 +12,6 @@ import kww.useless.visuals.FFTScreen;
 import kww.useless.visuals.FPSMeter;
 import kww.useless.visuals.Playa;
 import kww.useless.visuals.Profiling;
-import lombok.SneakyThrows;
 
 public class Instances {
     /** itdelatrisu aka Jeffrey Han */
@@ -43,11 +42,7 @@ public class Instances {
     public static Image fallback_bg;
 
     /** Executed somewhere in {@link GameOpsu} init */
-    @SneakyThrows
     public static void earlyInit() {
-//        new AnyShitGenerator().render();
-//        Thread.sleep(5000);
-//        Gdx.app.exit();
     }
 
     public static void init()
