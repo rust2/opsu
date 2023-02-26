@@ -78,7 +78,7 @@ public class NotificationManager {
 		private final int width, height;
 
 		/** The font to use. */
-		private final Font font = Fonts.SMALLBOLD;
+		private final UnicodeFont font = Fonts.SMALLBOLD;
 
 		/** Whether this notification has been clicked. */
 		private boolean clicked = false;

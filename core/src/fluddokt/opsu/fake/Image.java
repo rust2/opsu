@@ -4,7 +4,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import kww.useless.UselessUtils;
@@ -49,7 +48,6 @@ public class Image {
     static TextureRegion blank = new TextureRegion(new Texture(32, 32, Pixmap.Format.RGBA8888));
 
     Image parentImage;
-    FrameBuffer fb;
     Pixmap pixmap;
 
     public Image(String filename) throws SlickException
@@ -186,7 +184,6 @@ public class Image {
     {
         this.width = width;
         this.height = height;
-        fb = new FrameBuffer(Pixmap.Format.RGBA8888, width, height, false);
         textureRegion = new TextureRegion(new Texture(width, height, Pixmap.Format.RGBA8888));
         //name = "FrameBuffer image";
     }
@@ -233,10 +230,6 @@ public class Image {
         {
             pixmap.dispose();
             pixmap = null;
-        }
-        if (fb != null)
-        {
-            fb.dispose();
         }
 
         this.destroyed = true;

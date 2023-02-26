@@ -95,7 +95,7 @@ public class DropdownMenu<E> extends AbstractComponent {
 		chevronDownColor = textColor, chevronRightColor = backgroundColor;
 
 	/** The fonts to use. */
-	private Font fontNormal = Fonts.MEDIUM, fontSelected = Fonts.MEDIUMBOLD;
+	private UnicodeFont fontNormal = Fonts.MEDIUM, fontSelected = Fonts.MEDIUMBOLD;
 
 	/** The chevron images. */
 	private Image chevronDown, chevronRight;
@@ -123,7 +123,7 @@ public class DropdownMenu<E> extends AbstractComponent {
 	 * @param normal the normal font
 	 * @param selected the font for the selected item
 	 */
-	public DropdownMenu(GUIContext container, E[] items, float x, float y, Font normal, Font selected) {
+	public DropdownMenu(GUIContext container, E[] items, float x, float y, UnicodeFont normal, UnicodeFont selected) {
 		this(container, items, x, y, 0, normal, selected);
 	}
 
@@ -150,7 +150,7 @@ public class DropdownMenu<E> extends AbstractComponent {
 	 * @param normal the normal font
 	 * @param selected the font for the selected item
 	 */
-	public DropdownMenu(GUIContext container, E[] items, float x, float y, int width, Font normal, Font selected) {
+	public DropdownMenu(GUIContext container, E[] items, float x, float y, int width, UnicodeFont normal, UnicodeFont selected) {
 		super(container);
 		this.fontNormal = normal;
 		this.fontSelected = selected;

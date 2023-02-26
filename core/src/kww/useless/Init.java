@@ -1,7 +1,5 @@
 package kww.useless;
 
-import itdelatrisu.opsu.ui.Fonts;
-
 public class Init {
 
     public static void preInit()
@@ -13,23 +11,23 @@ public class Init {
     {
         Instances.init();
 
-        System.out.println("Fonts.DEFAULT size: " + Fonts.DEFAULT.getSize());
-        System.out.println("Fonts.BOLD size: " + Fonts.BOLD.getSize());
-        System.out.println("Fonts.XLARGE size: " + Fonts.XLARGE.getSize());
-        System.out.println("Fonts.LARGE size: " + Fonts.LARGE.getSize());
-        System.out.println("Fonts.MEDIUM size: " + Fonts.MEDIUM.getSize());
-        System.out.println("Fonts.MEDIUMBOLD size: " + Fonts.MEDIUMBOLD.getSize());
-        System.out.println("Fonts.SMALL size: " + Fonts.SMALL.getSize());
-        System.out.println("Fonts.SMALLBOLD size: " + Fonts.SMALLBOLD.getSize());
-        System.out.println("");
-        System.out.println("Fonts.DEFAULT line height: " + Fonts.DEFAULT.getLineHeight());
-        System.out.println("Fonts.BOLD line height: " + Fonts.BOLD.getLineHeight());
-        System.out.println("Fonts.XLARGE line height: " + Fonts.XLARGE.getLineHeight());
-        System.out.println("Fonts.LARGE line height: " + Fonts.LARGE.getLineHeight());
-        System.out.println("Fonts.MEDIUM line height: " + Fonts.MEDIUM.getLineHeight());
-        System.out.println("Fonts.MEDIUMBOLD line height: " + Fonts.MEDIUMBOLD.getLineHeight());
-        System.out.println("Fonts.SMALL line height: " + Fonts.SMALL.getLineHeight());
-        System.out.println("Fonts.SMALLBOLD line height: " + Fonts.SMALLBOLD.getLineHeight());
+//        System.out.println("Fonts.DEFAULT size: " + Fonts.DEFAULT.getSize());
+//        System.out.println("Fonts.BOLD size: " + Fonts.BOLD.getSize());
+//        System.out.println("Fonts.XLARGE size: " + Fonts.XLARGE.getSize());
+//        System.out.println("Fonts.LARGE size: " + Fonts.LARGE.getSize());
+//        System.out.println("Fonts.MEDIUM size: " + Fonts.MEDIUM.getSize());
+//        System.out.println("Fonts.MEDIUMBOLD size: " + Fonts.MEDIUMBOLD.getSize());
+//        System.out.println("Fonts.SMALL size: " + Fonts.SMALL.getSize());
+//        System.out.println("Fonts.SMALLBOLD size: " + Fonts.SMALLBOLD.getSize());
+//        System.out.println("");
+//        System.out.println("Fonts.DEFAULT line height: " + Fonts.DEFAULT.getLineHeight());
+//        System.out.println("Fonts.BOLD line height: " + Fonts.BOLD.getLineHeight());
+//        System.out.println("Fonts.XLARGE line height: " + Fonts.XLARGE.getLineHeight());
+//        System.out.println("Fonts.LARGE line height: " + Fonts.LARGE.getLineHeight());
+//        System.out.println("Fonts.MEDIUM line height: " + Fonts.MEDIUM.getLineHeight());
+//        System.out.println("Fonts.MEDIUMBOLD line height: " + Fonts.MEDIUMBOLD.getLineHeight());
+//        System.out.println("Fonts.SMALL line height: " + Fonts.SMALL.getLineHeight());
+//        System.out.println("Fonts.SMALLBOLD line height: " + Fonts.SMALLBOLD.getLineHeight());
     }
 
     //todo: finish

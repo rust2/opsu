@@ -507,9 +507,9 @@ public class LegacyCurveRenderState {
 					new PixmapTextureData(
 						new Pixmap(g2dpix),
 						Format.RGBA8888,
-						true,
-						false,
-						true
+						/*useMipMaps*/true, 
+						/*disposePixmap*/false, 
+						/*managed*/true
 					)
 				);
 			}

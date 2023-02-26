@@ -18,43 +18,22 @@
 
 package itdelatrisu.opsu.states;
 
+import fluddokt.newdawn.slick.state.transition.EasedFadeOutTransition;
+import fluddokt.newdawn.slick.state.transition.FadeInTransition;
 import fluddokt.opsu.fake.*;
-import fluddokt.newdawn.slick.state.transition.*;
-
-import itdelatrisu.opsu.GameData;
+import itdelatrisu.opsu.*;
 import itdelatrisu.opsu.GameData.Grade;
-import itdelatrisu.opsu.GameImage;
-import itdelatrisu.opsu.GameMod;
-import itdelatrisu.opsu.Opsu;
-import itdelatrisu.opsu.ScoreData;
-import itdelatrisu.opsu.Utils;
-//import itdelatrisu.opsu.audio.MultiClip;
 import itdelatrisu.opsu.audio.MusicController;
 import itdelatrisu.opsu.audio.SoundController;
 import itdelatrisu.opsu.audio.SoundEffect;
-import itdelatrisu.opsu.beatmap.Beatmap;
-import itdelatrisu.opsu.beatmap.BeatmapDifficultyCalculator;
-import itdelatrisu.opsu.beatmap.BeatmapGroup;
-import itdelatrisu.opsu.beatmap.BeatmapParser;
-import itdelatrisu.opsu.beatmap.BeatmapSet;
-import itdelatrisu.opsu.beatmap.BeatmapSetList;
-import itdelatrisu.opsu.beatmap.BeatmapSetNode;
-import itdelatrisu.opsu.beatmap.BeatmapSortOrder;
-import itdelatrisu.opsu.beatmap.LRUCache;
-import itdelatrisu.opsu.beatmap.OszUnpacker;
+import itdelatrisu.opsu.beatmap.*;
 import itdelatrisu.opsu.db.BeatmapDB;
 import itdelatrisu.opsu.db.ScoreDB;
 import itdelatrisu.opsu.options.OptionGroup;
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.options.OptionsOverlay;
 import itdelatrisu.opsu.states.ButtonMenu.MenuState;
-import itdelatrisu.opsu.ui.Colors;
-import itdelatrisu.opsu.ui.DropdownMenu;
-import itdelatrisu.opsu.ui.Fonts;
-import itdelatrisu.opsu.ui.KineticScrolling;
-import itdelatrisu.opsu.ui.MenuButton;
-import itdelatrisu.opsu.ui.StarStream;
-import itdelatrisu.opsu.ui.UI;
+import itdelatrisu.opsu.ui.*;
 import itdelatrisu.opsu.ui.animations.AnimatedValue;
 import itdelatrisu.opsu.ui.animations.AnimationEquation;
 import itdelatrisu.opsu.user.UserButton;
@@ -63,12 +42,6 @@ import itdelatrisu.opsu.user.UserSelectOverlay;
 import kww.opsu.states.MainMenu;
 import kww.useless.Parallax;
 
-/*
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.StandardWatchEventKinds;
-import java.nio.file.WatchEvent.Kind;
-*/
 import java.util.Map;
 import java.util.Stack; 
 
@@ -187,7 +160,7 @@ public class SongMenu extends BasicGameState {
 	private TextField search;
 
 	/** The search font. */
-	private Font searchFont;
+	private UnicodeFont searchFont;
 
 	/**
 	 * Delay timer, in milliseconds, before running another search.

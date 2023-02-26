@@ -88,18 +88,6 @@ public class MainMenu extends BasicGameState {
     /** Main "Play" and "Exit" buttons. */
     private MenuButton playButton, exitButton;
 
-//    /** Music control buttons. */
-//    private MenuButton musicPlay, musicPause, musicNext, musicPrevious;
-
-//    /** Button linking to Downloads menu. */
-//    private MenuButton downloadsButton;
-//    public ToolbarButton toolbarDownloadsButton;
-//    public ToolbarButton toolbarSettingsButton;
-//    public ToolbarButton toolbarProfileButton;
-
-//    /** Button linking to repository. */
-//    private MenuButton repoButton;
-
     /** Buttons for installing updates. */
     private MenuButton updateButton, restartButton;
 
@@ -115,26 +103,11 @@ public class MainMenu extends BasicGameState {
     /** Whether or not a notification was already sent upon entering. */
     private boolean enterNotification = false;
 
-//    /** Music position bar coordinates and dimensions. */
-//    private float musicBarX, musicBarY, musicBarWidth, musicBarHeight;
-
     /** Last measure progress value. */
     @Setter private float lastMeasureProgress = 0f;
 
     /** The star fountain. */
     private StarFountain starFountain;
-
-//    /** Music info bar "Now Playing" image. */
-//    private Image musicInfoImg;
-
-//    /** Music info bar rectangle. */
-//    private Rectangle musicInfoRect;
-
-    /** Music info bar fill. */
-    //TODO private GradientFill musicInfoFill;
-
-//    /** Music info bar animation progress. */
-//    private final AnimatedValue musicInfoProgress = new AnimatedValue(600, 0f, 1f, AnimationEquation.OUT_CUBIC);
 
     /** Options overlay. */
     private OptionsOverlay optionsOverlay;
@@ -335,19 +308,6 @@ public class MainMenu extends BasicGameState {
             }
         }
 
-        //top/bottom horizontal bars
-        //region oldcode
-        /*
-        // top/bottom horizontal bars
-        g.setColor(Colors.BLACK_ALPHA);
-        g.fillRect(0, 0, width, height * Options.getMobileUIScale(0.5f) / 9f);
-        g.fillRect(0, height * 8 / 9f, width, height / 9f);
-        */
-        //endregion
-//        g.setColor(Colors.BLACK_BARS);
-//        g.fillRect(0, 0, width, blackBarsHeight);
-//        g.fillRect(0, height - blackBarsHeight, width, blackBarsHeight);
-
         // draw star fountain
         starFountain.draw();
 
@@ -490,7 +450,7 @@ public class MainMenu extends BasicGameState {
 //        if (MusicController.trackExists())
 //            musicInfoProgress.update(delta);
 
-        // window focus change: increase/decrease theme song volume
+        // window focus change: increase/decrease song volume
         if (MusicController.isTrackDimmed() == container.hasFocus())
             MusicController.toggleTrackDimmed(0.33f);
 
@@ -707,20 +667,10 @@ public class MainMenu extends BasicGameState {
             playButton.resetHover();
         if (!exitButton.contains(mouseX, mouseY, 0.25f))
             exitButton.resetHover();
-//        if (!musicPlay.contains(mouseX, mouseY))
-//            musicPlay.resetHover();
-//        if (!musicPause.contains(mouseX, mouseY))
-//            musicPause.resetHover();
-//        if (!musicNext.contains(mouseX, mouseY))
-//            musicNext.resetHover();
-//        if (!musicPrevious.contains(mouseX, mouseY))
-//            musicPrevious.resetHover();
-//        if (repoButton != null && !repoButton.contains(mouseX, mouseY))
-//            repoButton.resetHover();
+
         updateButton.resetHover();
         restartButton.resetHover();
-//        if (!downloadsButton.contains(mouseX, mouseY))
-//            downloadsButton.resetHover();
+
         if (!userButton.contains(mouseX, mouseY))
             userButton.resetHover();
 
@@ -766,43 +716,6 @@ public class MainMenu extends BasicGameState {
         // edit kww: place a hook here for "my" player
         if (Instances.player.mousePressed(button, x, y))
             return;
-
-        // music position bar
-//        if (MusicController.isPlaying())
-//        {
-//            if (musicPositionBarContains(x, y))
-//            {
-//                lastMeasureProgress = 0f;
-//                float pos = (x - musicBarX) / musicBarWidth;
-//                MusicController.setPosition((int) (pos * MusicController.getDuration()));
-//                return;
-//            }
-//        }
-
-        // music button actions
-//        if (musicPlay.contains(x, y))
-//        {
-//            Instances.player.playPauseTrack();
-//            return;
-//        }
-//        else if (musicNext.contains(x, y))
-//        {
-//            Instances.player.nextTrack(true);
-//            return;
-//        }
-//        else if (musicPrevious.contains(x, y))
-//        {
-//            Instances.player.prevTrack();
-//            return;
-//        }
-
-//        // downloads button actions
-//        if (downloadsButton.contains(x, y))
-//        {
-//            SoundController.playSound(SoundEffect.MENUHIT);
-//            game.enterState(Opsu.STATE_DOWNLOADSMENU, new EasedFadeOutTransition(), new FadeInTransition());
-//            return;
-//        }
 
         if (Instances.toolbar.someButtonHasBeenPressed(x, y))
             return;
@@ -941,30 +854,14 @@ public class MainMenu extends BasicGameState {
                 break;
             // Music controls
             case Input.KEY_F1:
-//            case Input.KEY_Z:
                 Instances.player.prevTrack();
                 break;
-//            case Input.KEY_X:
-//                if (MusicController.isPlaying())
-//                {
-//                    lastMeasureProgress = 0f;
-//                    MusicController.setPosition(0);
-//                }
-//                else if (!MusicController.isTrackLoading())
-//                    MusicController.resume();
-//                UI.getNotificationManager().sendBarNotification("Play");
-//                break;
             case Input.KEY_F3:
-//            case Input.KEY_C:
                 Instances.player.togglePause();
                 break;
             case Input.KEY_F5:
-//            case Input.KEY_V:
                 Instances.player.nextTrack(true);
                 break;
-//            case Input.KEY_R:
-//                nextTrack(true);
-//                break;
             // Volume control
             case Input.KEY_UP:
                 UI.changeVolume(1);
@@ -1019,15 +916,8 @@ public class MainMenu extends BasicGameState {
         logo.resetHover();
         playButton.resetHover();
         exitButton.resetHover();
-//        musicPlay.resetHover();
-//        musicPause.resetHover();
-//        musicNext.resetHover();
-//        musicPrevious.resetHover();
-//        if (repoButton != null)
-//            repoButton.resetHover();
         updateButton.resetHover();
         restartButton.resetHover();
-//        downloadsButton.resetHover();
         userButton.resetHover();
     }
 
@@ -1123,7 +1013,7 @@ public class MainMenu extends BasicGameState {
         widthCenter = (int) (width / 2f);
         heightCenter = (int) (height / 2f);
 
-        logoSizeMultiplier = height / GameImage.MENU_LOGO.getImage().getHeight() * 0.5f;
+        logoSizeMultiplier = (float) height / GameImage.MENU_LOGO.getImage().getHeight() * 0.5f;
     }
 
     /** Logo states. */

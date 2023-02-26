@@ -220,7 +220,7 @@ public class GameOpsu extends ApplicationAdapter {
         }
         game.container.lostFocus();
 
-        System.out.println("Focus lost");
+        System.out.println("Game pause");
     }
 
     @Override
@@ -231,7 +231,7 @@ public class GameOpsu extends ApplicationAdapter {
 
         game.container.focus();
 
-        System.out.println("Focus re-gained");
+        System.out.println("Game resume");
     }
 
     @Override

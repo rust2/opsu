@@ -31,8 +31,8 @@ public class Graphics {
     @Getter static ShapeRenderer shapeRender;
     @Getter static ShapeDrawer shapeDrawer;
 
-    static Font curFont;
-    @Getter static OrthographicCamera camera;
+    static UnicodeFont curFont;
+    @Getter OrthographicCamera camera;
     final static Matrix4 transform = new Matrix4();
     public final static Matrix4 transformcombined = new Matrix4();
 
@@ -45,12 +45,6 @@ public class Graphics {
         SHAPEMASK,      //kww
     }
 
-    //    final static int NONE = 0;
-//    final static int SPRITE = 3;
-//    final static int SHAPELINE = 5;
-//    final static int SHAPEFILLED = 6;
-//    final static int SPRITEMASKED = 7; // kww
-//    final static int SHAPEMASK = 8; // kww
     public static final int MODE_NORMAL = 1;
     public static final int MODE_ALPHA_MAP = 2;
     public static final int MODE_ALPHA_BLEND = 3;
@@ -83,12 +77,12 @@ public class Graphics {
     {
         width = w;
         height = h;
-        camera = new OrthographicCamera(w, h);
-        camera.setToOrtho(true, w, h);
+        graphics.camera = new OrthographicCamera(w, h);
+        graphics.camera.setToOrtho(true, w, h);
 
         updateCamera();
 
-        for (IResizable resizable : g.resizables)
+        for (IResizable resizable : graphics.resizables)
         {
             resizable.resize();
         }
@@ -106,9 +100,9 @@ public class Graphics {
         bgcolor = ncolor;
     }
 
-    public void setFont(Font font)
+    public void setFont(UnicodeFont nfont)
     {
-        curFont = font;
+        curFont = nfont;
     }
 
     public void drawString(String str, float x, float y)
@@ -599,12 +593,12 @@ public class Graphics {
         batch.draw(tex, x, y + height, width, -height);
     }
 
-    static Graphics g = new Graphics();
-    static Graphics current = g;
+    static Graphics graphics = new Graphics();
+    static Graphics current = graphics;
 
     public static Graphics getGraphics()
     {
-        return g;
+        return graphics;
     }
 
     Rectangle scissor = new Rectangle();
@@ -777,8 +771,8 @@ public class Graphics {
 
     public static void updateCamera()
     {
-        camera.update();
-        transformcombined.set(camera.combined);
+        graphics.camera.update();
+        transformcombined.set(graphics.camera.combined);
         transformcombined.mul(transform);
         batch.setProjectionMatrix(transformcombined);
         shapeRender.setProjectionMatrix(transformcombined);

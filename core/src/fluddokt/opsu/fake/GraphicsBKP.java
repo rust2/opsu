@@ -26,7 +26,7 @@ public class GraphicsBKP {
     static ShapeRenderer shapeRender;
     @Getter static ShapeDrawer shapeDrawer;
 
-    static Font curFont;
+    static UnicodeFont curFont;
     static OrthographicCamera camera;
     final static Matrix4 transform = new Matrix4();
     public final static Matrix4 transformcombined = new Matrix4();
@@ -85,7 +85,7 @@ public class GraphicsBKP {
         bgcolor = ncolor;
     }
 
-    public void setFont(Font nfont)
+    public void setFont(UnicodeFont nfont)
     {
         curFont = nfont;
     }

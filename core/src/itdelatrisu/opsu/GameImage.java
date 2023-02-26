@@ -362,7 +362,7 @@ public enum GameImage {
                     return img.setAlpha(0.9f).getScaledCopy(w, h);
                 }
             },
-    MENU_LOGO("logo", "png", false, true)
+    MENU_LOGO("logo", "png", false, true) // kww: I wanna look if we can autoscale logo
             /*{
                 @Override
                 protected Image process_sub(Image img, int w, int h)

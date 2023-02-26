@@ -127,7 +127,7 @@ public class DownloadsMenu extends BasicGameState {
 	private TextField search;
 
 	/** The search font. */
-	private Font searchFont;
+	private UnicodeFont searchFont;
 
 	/**
 	 * Delay timer, in milliseconds, before running another search.

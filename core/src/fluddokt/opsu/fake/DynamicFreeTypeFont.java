@@ -16,8 +16,6 @@ import com.badlogic.gdx.utils.IntMap;
 
 import java.util.LinkedList;
 
-import static fluddokt.opsu.fake.Font.FontStyle;
-
 public class DynamicFreeTypeFont {
     static int PAD = 1;
     Face face;
@@ -237,7 +235,7 @@ public class DynamicFreeTypeFont {
         }
 
         int pixMapWidth = pixmap.getWidth();
-        if (fontParam.style == FontStyle.Bold)
+        if ((fontParam.style & Font.BOLD) > 0)
         {
             //	pixMapWidth+=1;
         }
@@ -273,10 +271,11 @@ public class DynamicFreeTypeFont {
 
         curPixmap.setBlending(Blending.None);
         curPixmap.drawPixmap(pixmap, x, y);
-        if (tparam.style == FontStyle.Bold)
+        if ((tparam.style & Font.BOLD) > 0)
         {
             curPixmap.setBlending(Blending.SourceOver);
             curPixmap.drawPixmap(pixmap, x, y);
+            curPixmap.drawPixmap(pixmap, x, y);//kww: ??
             curPixmap.setBlending(Blending.None);
         }
 
