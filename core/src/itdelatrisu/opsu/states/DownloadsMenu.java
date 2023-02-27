@@ -35,7 +35,10 @@ import itdelatrisu.opsu.beatmap.OszUnpacker;
 import itdelatrisu.opsu.downloads.Download;
 import itdelatrisu.opsu.downloads.DownloadList;
 import itdelatrisu.opsu.downloads.DownloadNode;
-import itdelatrisu.opsu.downloads.servers.*;
+import itdelatrisu.opsu.downloads.servers.DownloadServer;
+import itdelatrisu.opsu.downloads.servers.KitsuServer;
+import itdelatrisu.opsu.downloads.servers.NerinyanServer;
+import itdelatrisu.opsu.downloads.servers.RippleServer;
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.*;
 import itdelatrisu.opsu.ui.NotificationManager.NotificationListener;
@@ -81,10 +84,12 @@ public class DownloadsMenu extends BasicGameState {
 
 	/** Available beatmap download servers. */
 	private static final DownloadServer[] SERVERS = {
-		new RippleServer(),
-		new MnetworkServer(),
-		new HexideServer(),
-		new BloodcatServer(),
+            new RippleServer(),
+            //new MnetworkServer(),
+            //new HexideServer(),
+            //new BloodcatServer(),
+			new NerinyanServer(),
+			new KitsuServer()
 	};
 
 	/** The current list of search results. */
@@ -324,9 +329,9 @@ public class DownloadsMenu extends BasicGameState {
 
 		int width = container.getWidth();
 		int height = container.getHeight();
-		
+
 		titleY = height * 0.03f;//Utils.FONT_LARGE.getLineHeight();
-		
+
 		float baseX = width * 0.024f;
 		/*
 		float searchY = (height * 0.04f) + Fonts.LARGE.getLineHeight();
@@ -353,7 +358,7 @@ public class DownloadsMenu extends BasicGameState {
 		Image prevImg = GameImage.MUSIC_PREVIOUS.getImage();
 		Image nextImg = GameImage.MUSIC_NEXT.getImage();
 		pageButtonY = searchResultY  + Fonts.BOLD.getLineHeight() ;
-		
+
 		prevPage = new MenuButton(prevImg, baseX + prevImg.getWidth() / 2f,
 				pageButtonY + prevImg.getHeight() / 4);
 		nextPage = new MenuButton(nextImg, baseX + pageButtonWidth - nextImg.getWidth() / 2f,
@@ -455,7 +460,7 @@ public class DownloadsMenu extends BasicGameState {
 
 		// title
 		Fonts.LARGE.drawString(width * 0.024f, titleY, "Download Beatmaps!", Color.white);
-		
+
 		// search
 		g.setColor(Color.white);
 		g.setLineWidth(2f);
