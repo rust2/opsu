@@ -1,6 +1,6 @@
 # opsu! ~ an open-source osu! client
 
-A fork of [fork](https://github.com/fluddokt/opsu) of [opsu!](https://github.com/itdelatrisu/opsu) using libgdx to fake Slick2D's API.
+A fork of [fork](https://github.com/fluddokt/opsu) of [opsu!](https://github.com/itdelatrisu/opsu) that use libgdx to fake Slick2D's API and do it very bad.
 I do some shit here. Don't judge me, please.
 
 ## Building
