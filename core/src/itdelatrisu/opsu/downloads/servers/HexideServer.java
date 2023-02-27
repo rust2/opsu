@@ -37,6 +37,8 @@ import org.newdawn.slick.util.Log;
 
 /**
  * Download server: https://osu.hexide.com/
+ * <p>
+ * <i>This server is not available anymore.</i>
  */
 public class HexideServer extends DownloadServer {
 	/** Server name. */
