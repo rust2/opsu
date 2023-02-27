@@ -11,6 +11,7 @@ project.ext.wDir = new File("../run")//kww
 
 import org.gradle.internal.os.OperatingSystem
 
+// Do not run tasks from here.
 task run(dependsOn: classes, type: JavaExec) {
     main(project.mainClassName)
     classpath = sourceSets.main.runtimeClasspath
@@ -26,6 +27,7 @@ task run(dependsOn: classes, type: JavaExec) {
     }
 }
 
+// Do not run tasks from here.
 task debug(dependsOn: classes, type: JavaExec) {
     main = project.mainClassName
     classpath = sourceSets.main.runtimeClasspath
@@ -42,6 +44,7 @@ task debug(dependsOn: classes, type: JavaExec) {
     }
 }
 
+// Do not run tasks from here.
 task dist(type: Jar) {
     duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
     manifest {
