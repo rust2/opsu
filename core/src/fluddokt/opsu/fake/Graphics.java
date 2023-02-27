@@ -1,5 +1,6 @@
 package fluddokt.opsu.fake;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -71,6 +72,12 @@ public class Graphics {
         p.fill();
         shapeDrawer = new ShapeDrawer(batch, new TextureRegion(new Texture(p)));
         p.dispose();
+
+        // kww: for some reason, on android, the resize() method was not called on startup
+        if (Gdx.app.getType() == Application.ApplicationType.Android)
+        {
+            resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        }
     }
 
     public static void resize(int w, int h)
@@ -87,7 +94,8 @@ public class Graphics {
             resizable.resize();
         }
 
-        UI.getNotificationManager().sendBarNotification("Window size: " + w + "x" + h);
+        if(UI.getNotificationManager() != null)
+            UI.getNotificationManager().sendBarNotification("Window size: " + w + "x" + h);
     }
 
     public void registerResizable(IResizable resizable)
