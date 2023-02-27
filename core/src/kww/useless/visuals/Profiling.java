@@ -22,6 +22,7 @@ public class Profiling {
         if(!enabled)
             return;
 
+        //btw profiler info can't be retrieved on android...
         Fonts.SMALL.drawString(x, y, "calls: " + profiler.getCalls());
         Fonts.SMALL.drawString(x, y + offset, "textureBindings: " + profiler.getTextureBindings());
         Fonts.SMALL.drawString(x, y + offset * 2, "drawCalls: " + profiler.getDrawCalls());
