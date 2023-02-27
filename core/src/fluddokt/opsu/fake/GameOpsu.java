@@ -1,9 +1,7 @@
 package fluddokt.opsu.fake;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -158,6 +156,11 @@ public class GameOpsu extends ApplicationAdapter {
                         Gdx.input.setInputProcessor(new InputMultiplexer(stage, game));
                         inited = true;
                         table.removeActor(loadingLabel);
+
+                        //on android it is never resized so we have to call it at least once
+                        //let's keep this temporary fix
+                        if(Gdx.app.getType() == Application.ApplicationType.Android)
+                           Graphics.resize(game.container.width, game.container.height);
                     }
                 }
                 else
