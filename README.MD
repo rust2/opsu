@@ -8,7 +8,11 @@ Bleeding-edge builds are generated automatically for every commit. You can see t
 ![Actions](readme/finding-actions-how-to.png)
 
 If you'd rather compile on your own, follow these instructions.
-First, make sure you have at least [JDK 8](https://adoptium.net/temurin/archive/?version=8) installed. Open a terminal in the root directory and run the following commands:
+First, make sure you have at least [JDK 8](https://adoptium.net/temurin/archive/?version=8) installed.
+
+Then clone the project by command `git clone https://github.com/rust2/opsu.git`
+
+Open a command line or a terminal in the root directory of the project and run the following commands:
 
 ### Windows
 
