@@ -47,6 +47,7 @@ import itdelatrisu.opsu.user.UserButton;
 import itdelatrisu.opsu.user.UserList;
 import itdelatrisu.opsu.user.UserSelectOverlay;
 import kww.useless.Instances;
+import kww.useless.LogoButton;
 import kww.useless.Parallax;
 import kww.useless.UselessUtils;
 import lombok.Getter;
@@ -71,7 +72,7 @@ public class MainMenu extends BasicGameState {
 
     /** Logo button that reveals other buttons on click. */
     @Getter private MenuButton logo;
-    @Getter private float logoScale = 0f;
+    @Getter private float logoScale = 1f;
 
     /** Current logo state. */
     private LogoState logoState = LogoState.DEFAULT;
@@ -145,6 +146,8 @@ public class MainMenu extends BasicGameState {
     public float widthCenter, heightCenter;
     public float logoSizeMultiplier = 1f;
 
+    public LogoButton logo2;
+
     /** Footer */
     private final String version = OpsuConstants.PROJECT_NAME + " " + Updater.getInstance().getCurrentVersion();
 
@@ -188,6 +191,8 @@ public class MainMenu extends BasicGameState {
                 .setHoverAnimationDuration(logoAnimationDuration)
                 .setHoverAnimationEquation(logoAnimationEquation)
                 .setHoverExpand(logoHoverScale);
+
+        logo2 = new LogoButton(widthCenter, heightCenter);
 
         //kww
         //main menu toolbar
@@ -338,6 +343,8 @@ public class MainMenu extends BasicGameState {
         logoScale = logoSizeMultiplier * (1f + beatPosition * 0.04f);
         logo.draw(Color.white, logoScale);
 
+        //logo2.draw(logoScale);
+
 //        float ghostScale = logo.getLastScale() / logoScale * (1.08f - beatPosition * 0.04f);
 //        Image ghostLogo = GameImage.MENU_LOGO.getImage().getScaledCopy(ghostScale);
 //        ghostLogo.drawCentered(logo.getX(), logo.getY(), Colors.GHOST_LOGO);
@@ -358,6 +365,9 @@ public class MainMenu extends BasicGameState {
         // draw user button
         userButton.setUser(UserList.get().getCurrentUser());
         userButton.draw(g);
+
+        Graphics.checkMode(Graphics.DrawMode.SPRITE);
+        Graphics.getShapeDrawer().wedge2(150, 50, 200, 100, 30);
 
         // draw text
         float textAlpha;
@@ -433,6 +443,9 @@ public class MainMenu extends BasicGameState {
             playButton.hoverUpdate(delta, mouseX, mouseY, 0.25f);
             exitButton.hoverUpdate(delta, mouseX, mouseY, 0.25f);
         }
+
+        logo2.update();
+        logo2.hoverUpdate(delta, mouseX, mouseY);
 
         if (Updater.getInstance().showButton())
         {
@@ -720,36 +733,6 @@ public class MainMenu extends BasicGameState {
         if (Instances.toolbar.someButtonHasBeenPressed(x, y))
             return;
 
-//        // downloads button actions (modern)
-//        if (toolbarDownloadsButton.contains(x, y))
-//        {
-//            toolbarDownloadsButton.pressed();
-//            return;
-//        }
-//
-//        // settings button
-//        if (toolbarSettingsButton.contains(x, y))
-//        {
-//            toolbarSettingsButton.pressed();
-//            return;
-//        }
-//
-//        // user profile button
-//        if (toolbarProfileButton.contains(x, y))
-//        {
-//            toolbarProfileButton.pressed();
-//            return;
-//        }
-
-//        // repository button actions
-//        if (repoButton != null && repoButton.contains(x, y))
-//        {
-//            SoundController.playSound(SoundEffect.MENUHIT);
-//            ((ButtonMenu) game.getState(Opsu.STATE_BUTTONMENU)).setMenuState(MenuState.ABOUT);
-//            game.enterState(Opsu.STATE_BUTTONMENU);
-//            return;
-//        }
-
         // update button actions
         if (Updater.getInstance().showButton())
         {
@@ -807,6 +790,8 @@ public class MainMenu extends BasicGameState {
                 container.exit();
             }
         }
+
+        logo2.mousePressed(button);
     }
 
     @Override
@@ -1013,7 +998,10 @@ public class MainMenu extends BasicGameState {
         widthCenter = (int) (width / 2f);
         heightCenter = (int) (height / 2f);
 
-        logoSizeMultiplier = (float) height / GameImage.MENU_LOGO.getImage().getHeight() * 0.5f;
+        if (height < width)
+            logoSizeMultiplier = (float) height / GameImage.MENU_LOGO.getImage().getHeight() * 0.65f;
+        else // Are you against me???
+            logoSizeMultiplier = (float) width / GameImage.MENU_LOGO.getImage().getWidth() * 0.65f;
     }
 
     /** Logo states. */
