@@ -363,13 +363,19 @@ public enum GameImage {
                 }
             },
     MENU_LOGO("logo", "png", false, true) // kww: I wanna look if we can autoscale logo
-            /*{
+            {
                 @Override
+                protected void process()
+                {
+                    setImage(process_sub(getImage(), 0, 0));
+                }
+
+                /*@Override
                 protected Image process_sub(Image img, int w, int h)
                 {
                     return img.getScaledCopy(0.8f); // 0.8f
-                }
-            }*/,
+                }*/
+            },
     MENU_PLAY("menu-play", "png", false, false)
             {
                 @Override
@@ -1217,6 +1223,7 @@ public enum GameImage {
      * Performs individual post-loading actions on the image.
      */
     //kww: private -> protected (for override)
+    // Sometimes you don't want to change image scale depending on container height
     protected void process()
     {
         int unscaledWidth = UNSCALED_HEIGHT * containerWidth / containerHeight;

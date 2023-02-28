@@ -72,8 +72,8 @@ public class FFTScreen implements IInitable, Disposable {
         NONE
     }
 
-    Timer timer = new Timer();
-    Timer.Task task_updateAmplitudes = new Timer.Task() {
+    private final Timer timer = new Timer();
+    private final Timer.Task task_updateAmplitudes = new Timer.Task() {
         @Override
         public void run()
         {
@@ -257,6 +257,7 @@ public class FFTScreen implements IInitable, Disposable {
     @Override
     public void dispose()
     {
+        System.out.println(FFTScreen.class + " is disposing...");
         renderer.dispose();
     }
 }

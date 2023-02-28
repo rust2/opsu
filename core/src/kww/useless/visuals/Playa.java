@@ -132,6 +132,18 @@ public class Playa implements IInitable, IResizable {
         musicPrevious.setX(widthCenter - buttonWidth).setY(buttonY);
     }
 
+    private void updateButtonsPosition()
+    {
+        y = verticalPos.getValue();
+        musicBarY = y + height - cornerRadius * 2; // it has to be updated, too
+
+        float btnY = musicBarY - buttonBox_height / 2f;
+        musicPlay.setY(btnY);
+        musicPause.setY(btnY);
+        musicNext.setY(btnY);
+        musicPrevious.setY(btnY);
+    }
+
     public void draw()
     {
         if (!active)
@@ -142,15 +154,6 @@ public class Playa implements IInitable, IResizable {
 
     public void renderDrawer()
     {
-        y = verticalPos.getValue();
-        musicBarY = y + height - cornerRadius * 2; // it has to be updated, too
-
-        float btnY = musicBarY - buttonBox_height / 2f;
-        musicPlay.setY(btnY);
-        musicPause.setY(btnY);
-        musicNext.setY(btnY);
-        musicPrevious.setY(btnY);
-
         // background
         g.setColor(whitePeopleBeLike);
         Graphics.Masked.shapeMaskBegin();
@@ -267,6 +270,8 @@ public class Playa implements IInitable, IResizable {
                 break;
             }
         }
+
+        updateButtonsPosition();
 
         for (int i = 0; i < bgArray.size; i++)
         {

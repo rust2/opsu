@@ -18,7 +18,7 @@ import java.util.Map;
 
 import static kww.useless.visuals.image.TextureAtlas.*;
 
-/** I did some changed here */
+/** I did some changes here */
 public class Image {
     @Getter TextureRegion textureRegion;
 
@@ -206,12 +206,6 @@ public class Image {
     public Image setAlpha(float alpha)
     {
         this.alpha = MathUtils.clamp(alpha, 0, 1);
-        return this;
-    }
-
-    public Image setScale(float scaleMultiplier)
-    {
-
         return this;
     }
 
