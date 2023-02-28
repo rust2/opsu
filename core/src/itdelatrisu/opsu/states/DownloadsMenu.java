@@ -37,7 +37,6 @@ import itdelatrisu.opsu.downloads.DownloadList;
 import itdelatrisu.opsu.downloads.DownloadNode;
 import itdelatrisu.opsu.downloads.servers.DownloadServer;
 import itdelatrisu.opsu.downloads.servers.KitsuServer;
-import itdelatrisu.opsu.downloads.servers.NerinyanServer;
 import itdelatrisu.opsu.downloads.servers.RippleServer;
 import itdelatrisu.opsu.options.Options;
 import itdelatrisu.opsu.ui.*;
@@ -88,8 +87,7 @@ public class DownloadsMenu extends BasicGameState {
             //new MnetworkServer(),
             //new HexideServer(),
             //new BloodcatServer(),
-			new NerinyanServer(),
-			new KitsuServer()
+			new KitsuServer(),
 	};
 
 	/** The current list of search results. */
