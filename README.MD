@@ -28,11 +28,15 @@ _Build:_ `./gradlew desktop:dist`
 ### Android (If you use Intellij IDEA or Android Studio) `//fixme`
 #### P.S. I'm noob at this theme...
 
-1. Enable Android plugin
+1. Enable Android plugin.
 ![Actions](readme/Intellij-enable-android-plugin.png)
-2. When importing a project, IDEA will download needed SDK and platform-tools
+2. When importing a project, IDEA will download needed SDK and platform-tools.
 3. Set the `ANDROID_HOME` environment variable to point to your unzipped Android SDK directory.
 7. Enable developer mode on your device/emulator. If you are on testing on a phone you can follow [these instructions](https://developer.android.com/studio/command-line/adb#Enabling), otherwise you need to google how to enable your emulator's developer mode specifically.
 8. Run `gradlew android:assembleDebug` (or `./gradlew` if on linux/mac). This will create an unsigned APK in `android/build/outputs/apk`.
+
+## If something refuses to work...
+If your IDE throws an error while trying to launch a desktop project, go to project folder and create there a `run` folder.
+>On one PC I had to create the folder myself, on another it was created automatically (as it supposed to be).
 
 ## [Credits](https://github.com/fluddokt/opsu/blob/master/CREDITS.md)
