@@ -209,6 +209,14 @@ public class Image {
         return this;
     }
 
+    public Image resizeTo(float width, float height)
+    {
+        this.width = (int) width;
+        this.height = (int) height;
+
+        return this;
+    }
+
     @Getter boolean destroyed;
 
     public void destroy() throws SlickException
