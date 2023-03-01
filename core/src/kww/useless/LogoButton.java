@@ -18,6 +18,7 @@ public class LogoButton extends Circle implements IButton, IResizable {
      * <p> You can't just change logo image, right?...
      */
     private Image logoImage;
+    private float baseLogoRadius;
 
     //todo: better naming
     private float aspectRatio = 1f;
@@ -31,31 +32,17 @@ public class LogoButton extends Circle implements IButton, IResizable {
         this.x = x;
         this.y = y;
         this.logoImage = GameImage.MENU_LOGO.getImage().copy();
-        this.radius = logoImage.getHeight(); // Assuming logo is a circle...
+        this.radius = this.baseLogoRadius = logoImage.getHeight() / 2f; // Assuming logo is a circle...
+
+        Graphics.getGraphics().registerResizable(this);
     }
 
     public void draw(float sizeMultiplier)
     {
-        this.radius = sizeMultiplier;
+        this.radius = this.baseLogoRadius * aspectRatio * sizeMultiplier;
         drawDebug();
 
-        //logoImage = logoImage.getScaledCopy(sizeMultiplier);
-        //logoImage.drawCentered(x, y, Colors.GrayF.fake());
-
-        float xScaleOffset = 0f, yScaleOffset = 0f;
-        if (sizeMultiplier != 1f)
-        {
-            tmp = logoImage.getScaledCopy(sizeMultiplier);
-            xScaleOffset = tmp.getWidth() / 2f - radius;
-            yScaleOffset = tmp.getHeight() / 2f - radius;
-        }
-
-        tmp.draw(x - radius - xScaleOffset, y - radius - yScaleOffset, Colors.GrayF.fake());
-
-
-        Graphics.checkMode(Graphics.DrawMode.SPRITE);
-        Graphics.getGraphics().setColor(Colors.SomeDebugColor1.fake());
-        Graphics.getShapeDrawer().filledCircle(x, y, radius);
+        logoImage.resizeTo(this.radius * 2, this.radius * 2).drawCentered(x, y);
     }
 
     public void update()
@@ -69,14 +56,6 @@ public class LogoButton extends Circle implements IButton, IResizable {
         hoverUpdate(delta, contains(cx, cy));
     }
 
-    @Override
-    public boolean contains(float x, float y)
-    {
-        x = x - this.x;
-        y = y - this.y;
-        return x * x + y * y <= radius * radius;
-    }
-
     /**
      * Processes a hover action depending on whether or not the cursor
      * is hovering over the button.
@@ -86,8 +65,6 @@ public class LogoButton extends Circle implements IButton, IResizable {
      */
     public void hoverUpdate(int delta, boolean isHover)
     {
-        if (isHover)
-            System.out.println("hover");
         int d = delta * (isHover ? 1 : -1);
 
         // scale the button
@@ -97,7 +74,10 @@ public class LogoButton extends Circle implements IButton, IResizable {
 
     public void mousePressed(int button)
     {
-        if (!isHovered || button != Input.MOUSE_RIGHT_BUTTON)
+        if (!isHovered)
+            return;
+
+        if (button == Input.MOUSE_RIGHT_BUTTON)
             return;
 
         pressed();
@@ -105,14 +85,13 @@ public class LogoButton extends Circle implements IButton, IResizable {
 
     public void drawDebug()
     {
+        float x, y, w, h;
+        x = this.x - radius;
+        y = this.y - radius;
+        w = h = radius * 2;
         Graphics.checkMode(Graphics.DrawMode.SPRITE);
         Graphics.getGraphics().setColor(Colors.SomeDebugColor1.fake());
-        Graphics.getShapeDrawer().rectangle(
-                x - radius,
-                y - radius,
-                x + radius,
-                y + radius
-        );
+        Graphics.getShapeDrawer().rectangle(x, y, w, h);
     }
 
     @Override

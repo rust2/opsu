@@ -340,10 +340,10 @@ public class MainMenu extends BasicGameState {
         float ghostScale = logo.getLastScale() / scale * (1.05f - position * 0.025f);
         */
         //endregion
-        logoScale = logoSizeMultiplier * (1f + beatPosition * 0.04f);
-        logo.draw(Color.white, logoScale);
+        logoScale = 1f + beatPosition * 0.04f;
+        //logo.draw(Color.white, logoScale);
 
-        //logo2.draw(logoScale);
+        logo2.draw(logoScale);
 
 //        float ghostScale = logo.getLastScale() / logoScale * (1.08f - beatPosition * 0.04f);
 //        Image ghostLogo = GameImage.MENU_LOGO.getImage().getScaledCopy(ghostScale);
