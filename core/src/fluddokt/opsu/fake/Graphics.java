@@ -16,11 +16,11 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import com.badlogic.gdx.utils.Array;
 import itdelatrisu.opsu.ui.UI;
+import kww.useless.ShapeDrawerEx;
 import kww.useless.interfaces.IResizable;
 import kww.useless.visuals.Color255;
 import lombok.Getter;
 import lombok.Setter;
-import space.earlygrey.shapedrawer.ShapeDrawer;
 
 import java.util.LinkedList;
 
@@ -30,10 +30,10 @@ public class Graphics {
 
     public static SpriteBatch batch;
     @Getter static ShapeRenderer shapeRender;
-    @Getter static ShapeDrawer shapeDrawer;
+    @Getter static ShapeDrawerEx shapeDrawer;
 
     static UnicodeFont curFont;
-    @Getter OrthographicCamera camera;
+    static OrthographicCamera camera;
     final static Matrix4 transform = new Matrix4();
     public final static Matrix4 transformcombined = new Matrix4();
 
@@ -70,7 +70,7 @@ public class Graphics {
         Pixmap p = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         p.setColor(0xffffffff);
         p.fill();
-        shapeDrawer = new ShapeDrawer(batch, new TextureRegion(new Texture(p)));
+        shapeDrawer = new ShapeDrawerEx(batch, new TextureRegion(new Texture(p)));
         p.dispose();
 
         // kww: for some reason, on android, the resize() method was not called on startup
@@ -84,8 +84,8 @@ public class Graphics {
     {
         width = w;
         height = h;
-        graphics.camera = new OrthographicCamera(w, h);
-        graphics.camera.setToOrtho(true, w, h);
+        camera = new OrthographicCamera(w, h);
+        camera.setToOrtho(true, w, h);
 
         updateCamera();
 
@@ -142,7 +142,7 @@ public class Graphics {
         shapeDrawer.setColor(fgcolor.r, fgcolor.g, fgcolor.b, fgcolor.a * alpha);
     }
 
-    public void setAntiAlias(boolean b)
+    public void setAntiAlias(boolean ignored)
     {
         // TODO Auto-generated method stub
     }
@@ -667,15 +667,9 @@ public class Graphics {
         //clear();
     }
 
-    protected void bind()
-    {
+    protected void bind() {}
 
-    }
-
-    protected void unbind()
-    {
-
-    }
+    protected void unbind() {}
 
     public void clear()
     {
@@ -684,7 +678,6 @@ public class Graphics {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         if (current != this)
             unbind();
-
     }
 
     public void setDrawMode(int mode)
@@ -793,8 +786,8 @@ public class Graphics {
         return new Matrix4();
     }
 
-    private LinkedList<Matrix4> transformStack = new LinkedList<Matrix4>();
-    private LinkedList<Matrix4> transformPool = new LinkedList<Matrix4>();
+    private final LinkedList<Matrix4> transformStack = new LinkedList<>();
+    private final LinkedList<Matrix4> transformPool = new LinkedList<>();
 
     public void resetTransform()
     {

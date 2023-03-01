@@ -366,9 +366,6 @@ public class MainMenu extends BasicGameState {
         userButton.setUser(UserList.get().getCurrentUser());
         userButton.draw(g);
 
-        Graphics.checkMode(Graphics.DrawMode.SPRITE);
-        Graphics.getShapeDrawer().wedge2(150, 50, 200, 100, 30);
-
         // draw text
         float textAlpha;
         if (logoState == LogoState.DEFAULT)
