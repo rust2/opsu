@@ -1,6 +1,6 @@
 # opsu! ~ an open-source osu! client
 
-![машрумс](https://img.shields.io/badge/%D0%BC%D0%B0%D1%88%D1%80%D1%83%D0%BC%D1%81-1f1f1f) ![мастхэв](https://img.shields.io/badge/%D0%BC%D0%B0%D1%81%D1%82%D1%85%D1%8D%D0%B2-1f1f1f) ![брэд](https://img.shields.io/badge/%D0%B1%D1%80%D1%8D%D0%B4-1f1f1f) ![спишь](https://img.shields.io/badge/%D1%81%D0%BF%D0%B8%D1%88%D1%8C-1f1f1f)
+![машрумс](https://img.shields.io/badge/%D0%BC%D0%B0%D1%88%D1%80%D1%83%D0%BC%D1%81-1f1f1f?style=flat-square) ![мастхэв](https://img.shields.io/badge/%D0%BC%D0%B0%D1%81%D1%82%D1%85%D1%8D%D0%B2-1f1f1f?style=flat-square) ![брэд](https://img.shields.io/badge/%D0%B1%D1%80%D1%8D%D0%B4-1f1f1f?style=flat-square) ![спишь](https://img.shields.io/badge/%D1%81%D0%BF%D0%B8%D1%88%D1%8C-1f1f1f?style=flat-square)
 
 A fork of [fork](https://github.com/fluddokt/opsu) of [opsu!](https://github.com/itdelatrisu/opsu) that use libgdx to fake Slick2D's API and do it very bad.
 I do some shit here. Don't judge me, please.
