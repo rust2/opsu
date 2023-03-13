@@ -8,7 +8,7 @@ A fork of [fork](https://github.com/fluddokt/opsu) of [opsu!](https://github.com
 I do some shit here. Don't judge me, please.
 
 ## Building
-Bleeding-edge builds are generated automatically for every commit. You can see them in the actions tab.
+Bleeding-edge builds are generated automatically for every commit. You can see them in the [actions](https://github.com/rust2/opsu/actions) tab (you have to be logged in).
 
 ![Actions](readme/finding-actions-how-to.png)
 
