@@ -34,7 +34,7 @@ _Build:_ `./gradlew desktop:dist`
 
 1. Enable Android plugin.
 ![Actions](readme/Intellij-enable-android-plugin.png)
-2. When importing a project, IDEA will download needed SDK and platform-tools.
+2. While importing a project, IDEA will download needed SDK and platform-tools.
 3. Set the `ANDROID_HOME` environment variable to point to your unzipped Android SDK directory.
 7. Enable developer mode on your device/emulator. If you are on testing on a phone you can follow [these instructions](https://developer.android.com/studio/command-line/adb#Enabling), otherwise you need to google how to enable your emulator's developer mode specifically.
 8. Run `gradlew android:assembleDebug` (or `./gradlew` if on linux/mac). This will create an unsigned APK in `android/build/outputs/apk`.
